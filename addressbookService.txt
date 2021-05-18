@@ -1,0 +1,164 @@
+UC-1:
+mysql> CREATE DATABASE addressbookservice;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| addressbook        |
+| addressbookservice |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+UC-2:
+mysql> CREATE TABLE addressbookservice (id int AUTO_INCREMENT, firstName char(20), lastName char(20), address char(20), city char(20), state char(20), zip int, mobileNumber long, email char(20), PRIMARY KEY (id));
+Query OK, 0 rows affected (1.69 sec)
+
+mysql> select * from addressbookservice;
+Empty set (0.10 sec)
+
+mysql> DESCRIBE addressbookservice;
++--------------+------------+------+-----+---------+----------------+
+| Field        | Type       | Null | Key | Default | Extra          |
++--------------+------------+------+-----+---------+----------------+
+| id           | int        | NO   | PRI | NULL    | auto_increment |
+| firstName    | char(20)   | YES  |     | NULL    |                |
+| lastName     | char(20)   | YES  |     | NULL    |                |
+| address      | char(20)   | YES  |     | NULL    |                |
+| city         | char(20)   | YES  |     | NULL    |                |
+| state        | char(20)   | YES  |     | NULL    |                |
+| zip          | int        | YES  |     | NULL    |                |
+| mobileNumber | mediumtext | YES  |     | NULL    |                |
+| email        | char(20)   | YES  |     | NULL    |                |
++--------------+------------+------+-----+---------+----------------+
+9 rows in set (0.19 sec)
+
+
+UC-3;
+mysql> ALTER TABLE addressbookservice ADD  email char(20);
+Query OK, 0 rows affected (0.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE addressbookservice;
++--------------+------------+------+-----+---------+----------------+
+| Field        | Type       | Null | Key | Default | Extra          |
++--------------+------------+------+-----+---------+----------------+
+| id           | int        | NO   | PRI | NULL    | auto_increment |
+| firstName    | char(20)   | YES  |     | NULL    |                |
+| lastName     | char(20)   | YES  |     | NULL    |                |
+| address      | char(20)   | YES  |     | NULL    |                |
+| city         | char(20)   | YES  |     | NULL    |                |
+| state        | char(20)   | YES  |     | NULL    |                |
+| zip          | int        | YES  |     | NULL    |                |
+| mobileNumber | mediumtext | YES  |     | NULL    |                |
+| email        | char(20)   | YES  |     | NULL    |                |
++--------------+------------+------+-----+---------+----------------+
+9 rows in set (0.06 sec)
+
+
+UC-4;
+mysql> select * from addressbookservice;
++----+-----------+----------+---------+---------+------------+------+--------------+-------+
+| id | firstName | lastName | address | city    | state      | zip  | mobileNumber | email |
++----+-----------+----------+---------+---------+------------+------+--------------+-------+
+|  1 | Avi       | jadhav   | solapur | solapur | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+---------+---------+------------+------+--------------+-------+
+1 row in set (0.07 sec)
+
+mysql> update addressbookservice set city = "omerga" where firstName = "Avi";
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbookservice;
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+| id | firstName | lastName | address | city   | state      | zip  | mobileNumber | email |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+|  1 | Avi       | jadhav   | solapur | omerga | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+1 row in set (0.00 sec)
+
+UC-5:
+mysql> select * from addressbookservice;
++----+-----------+----------+----------+--------+------------+------+--------------+-------+
+| id | firstName | lastName | address  | city   | state      | zip  | mobileNumber | email |
++----+-----------+----------+----------+--------+------------+------+--------------+-------+
+|  1 | Avi       | jadhav   | solapur  | omerga | maharastra |   10 | 234          | sdfdf |
+|  2 | amar      | kesarkar | kolhapur | pune   | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+----------+--------+------------+------+--------------+-------+
+2 rows in set (0.02 sec)
+
+mysql> delete from addressbookservice where firstName = "amar";
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from addressbookservice;
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+| id | firstName | lastName | address | city   | state      | zip  | mobileNumber | email |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+|  1 | Avi       | jadhav   | solapur | omerga | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+1 row in set (0.00 sec)
+
+
+UC-6:
+mysql> select * from addressbookservice where city = "pune";
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+| id | firstName | lastName | address  | city | state      | zip  | mobileNumber | email |
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+|  2 | amar      | kesarkar | kolhapur | pune | maharastra |   10 | 234          | sdfdf |
+|  3 | vivek     | garud    | jalgaon  | pune | karnatka   |   10 | 234          | sdfdf |
+|  4 | raj       | kesarkar | kolhapur | pune | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from addressbookservice where city = "omerga";
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+| id | firstName | lastName | address | city   | state      | zip  | mobileNumber | email |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+|  1 | Avi       | jadhav   | solapur | omerga | maharastra |   10 | 234          | sdfdf |
++----+-----------+----------+---------+--------+------------+------+--------------+-------+
+1 row in set (0.00 sec)
+
+UC-7:
+mysql> select COUNT(*) from addressbookservice where city = "pune";
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.05 sec)
+
+
+UC-8:
+mysql> select * from addressbookservice where city="pune" ORDER BY firstName;
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+| id | firstName | lastName | address  | city | state      | zip  | mobileNumber | email |
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+|  2 | amar      | kesarkar | kolhapur | pune | maharastra |   10 | 234          | sdfdf |
+|  4 | raj       | kesarkar | kolhapur | pune | maharastra |   10 | 234          | sdfdf |
+|  3 | vivek     | garud    | jalgaon  | pune | karnatka   |   10 | 234          | sdfdf |
++----+-----------+----------+----------+------+------------+------+--------------+-------+
+3 rows in set (0.00 sec)
+
+UC-9:
+
+mysql> alter table person ADD type VARCHAR(50);
+Query OK, 0 rows affected (0.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table person ADD addressbookname VARCHAR(50);
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from person;
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+| personId | FirstName | LastName | Address | City | State | Zip  | MobileNumber | Email | type | addressbookname |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+|        1 | Avi       | Jadhav   | dsfg    | asdf | sad   |  324 |          324 | sadf  | NULL | NULL            |
+|        2 | Amar      | kesarkar | dsfg    | asdf | sad   |  324 |          324 | sadf  | NULL | NULL            |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+2 rows in set (0.00 sec)
