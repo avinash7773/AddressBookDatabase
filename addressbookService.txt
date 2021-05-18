@@ -162,3 +162,52 @@ mysql> select * from person;
 |        2 | Amar      | kesarkar | dsfg    | asdf | sad   |  324 |          324 | sadf  | NULL | NULL            |
 +----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
 2 rows in set (0.00 sec)
+
+UC-10:
+mysql> select * from person;
++----------+-----------+----------+---------+------+-------+------+--------------+--------+------+-----------------+
+| personId | FirstName | LastName | Address | City | State | Zip  | MobileNumber | Email  | type | addressbookname |
++----------+-----------+----------+---------+------+-------+------+--------------+--------+------+-----------------+
+|        1 | Avi       | Jadhav   | dsfg    | asdf | sad   |  324 |          324 | sadf   |    2 |              20 |
+|        2 | Amar      | kesarkar | dsfg    | asdf | sad   |  324 |          324 | sadf   |    3 |              10 |
+|        3 | vivek     | garud    | sad     | asd  | asdd  |  213 |          213 | addsaf |    1 |              20 |
+|        4 | raj       | patil    | sdfdf   | dsf  | dsf   | 2332 |          234 | sdfdf  |    2 |              30 |
++----------+-----------+----------+---------+------+-------+------+--------------+--------+------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select COUNT(*) from person p INNER JOIN  type t ON p.type = t.typeID where t.type = "family";
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+
+UC-11:
+mysql> select * from person where city = "asdf";
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+| personId | FirstName | LastName | Address | City | State | Zip  | MobileNumber | Email | type | addressbookname |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+|        1 | Avi       | Jadhav   | dsfg    | asdf | sad   |  324 |          324 | sadf  |    2 |              20 |
+|        2 | Amar      | kesarkar | dsfg    | asdf | sad   |  324 |          324 | sadf  |    3 |              10 |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select COUNT(*) from person where state = "sad";
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+mysql> select * from person where city = "asdf" ORDER BY FirstName;
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+| personId | FirstName | LastName | Address | City | State | Zip  | MobileNumber | Email | type | addressbookname |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+|        2 | Amar      | kesarkar | dsfg    | asdf | sad   |  324 |          324 | sadf  |    3 |              10 |
+|        1 | Avi       | Jadhav   | dsfg    | asdf | sad   |  324 |          324 | sadf  |    2 |              20 |
++----------+-----------+----------+---------+------+-------+------+--------------+-------+------+-----------------+
+2 rows in set (0.00 sec)
+
+
